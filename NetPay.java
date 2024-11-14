@@ -5,7 +5,7 @@ public class NetPay extends PaySlip{
     private double prsiRate;
     //4.1%
     private double healthInsuranceRate;
-    //
+    // 1600 euro /12 for monthly
     private double uscRate;
     // if salary greater than 12,012 tax is 0.5%
     // < than 25760 is 2%
