@@ -8,13 +8,13 @@ public class NetPay extends PaySlip{
     // 1600 euro /12 for monthly (based on average health insurance rate in Ireland)
     private double uscRate;
     if (salary < 12012) {
-    uscRate = 0.05% }
+    uscRate = 0.005 }
     else if (salary < 25760) {
-    uscRate = 2% }
+    uscRate = 0.02 }
     else if (salary < 70044) {
-    uscRate = 4% }
+    uscRate = 0.04 }
     else {
-    uscRate = 8% }
+    uscRate = 0.08 }
     // if salary less than 12,012 tax is 0.5%
     // <12012 > 25760 is 2%
     // >25760 <70,044 is 4%
