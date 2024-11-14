@@ -1,3 +1,4 @@
+// Shaun
 public class NetPay extends PaySlip{
     private double salary;
     private double prsiRate;
