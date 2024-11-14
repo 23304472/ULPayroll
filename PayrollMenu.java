@@ -1,5 +1,5 @@
 import java.util.Scanner;
-//implements payroll system
+//implements payroll system--Conor
 public class PayrollMenu {
     Scanner in = new Scanner();
 
