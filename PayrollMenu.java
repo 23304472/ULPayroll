@@ -2,7 +2,7 @@ import java.util.Scanner;
 //Conor
 public class PayrollMenu {
     
-       
+    public static void main(String[] args) {   
     //implements scanner
     Scanner in = new Scanner(System.in);
     //asks for user login (employee, admin, hr)
@@ -31,8 +31,10 @@ public class PayrollMenu {
     
     if(user_type == 2){
     //1.implement promotion
-        
     }
+    
+    
+}
 
 
 
