@@ -14,7 +14,7 @@ public class Admin {
     public void addEmployee(Employee employee){
        BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
 
-      //Puts the employeee details in a line in csv file
+      //Puts the employee details in a line in csv file
       String line = employee.getName() + "," + employee.getTitle() + "," + employee.getRole();
 
       //writes the line into the csv file and goes to next line then closes the writer
