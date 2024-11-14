@@ -10,8 +10,19 @@ public class Admin {
     this.filePath = filePath;
   }
     
+  //adds a new employee to the csv file
     public void addEmployee(Employee employee){
-        //add to csv file
-      BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+       BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+
+      //Puts the employeee details in a line in csv file
+      String line = employee.getName() + "," + employee.getTitle() + "," + employee.getRole();
+
+      //writes the line into the csv file and goes to next line then closes the writer
+      writer.write(line);
+      writer.newLine();
+      writer.close();
+
+      //Prints info about new employee
+      System.out.println("New Employee added:" + line);
       
 }
