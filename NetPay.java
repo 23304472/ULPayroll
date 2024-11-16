@@ -37,7 +37,7 @@ public class NetPay extends Payslip {
                 - (grossPay * prsiRate)
                 - (grossPay * uscRate)
                 - (grossPay * unionFeesRate)
-                - (grossPay * incomeTax)
+                - incomeTax
                 - healthInsuranceRate;
     }
     // getters and setters
