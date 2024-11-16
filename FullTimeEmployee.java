@@ -1,14 +1,40 @@
 //Emma
 public class FullTimeEmployee extends Employee{
 
-    public FullTimeEmployee(String name, String role){
-        super(name, role);
+    private double hours;
+
+    public FullTimeEmployee(int id, String name, String title, double hours){
+        super(id, name, title);
+        this.hours = hours;
     }
 
-//gets full-time salary from full-time csv file
+    public String getName(){
+        return super.getName();
+    } public void setName(String name){
+        super.setName();
+    }
+
+    public String getTitle(){
+        return super.getTitle();
+    } public void setTitle(String title){
+        super.setTitle();
+    }
+
+    public double getHours(){
+        return hours;
+    } public void setHours(double hours){
+        this.hours = hours;
+    }
+
+    public String getHourlyRate(){
+        //calls csv read fulltime file method
+    }
+
+
     @Override
     public String toString(){
-        return super.toString() + "Employee is paid a full-time salary";
+        return super.toString() +
+                "Salary type: Full-time" + "\n";
     }
 
 }
