@@ -1,4 +1,4 @@
-//Emma
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 
 public class Employee {
@@ -6,16 +6,16 @@ public class Employee {
     protected int id;
     protected String name;
     protected String title;
+    protected LocalDate dateAdded;
+    CSVWrite csv = new CSVWrite("Employees.csv"); //
 
-    public Employee(){
-    }
-
-    public Employee(int id, String name, String title){
+    public Employee(int id, String name, String title) throws FileNotFoundException {
         this.name = name;
         this.title = title;
-        LocalDate dateCreated = new LocalDate();
-        //call CSVWrite
+        LocalDate dateAdded = LocalDate.now(); //stores date employees is added
+        csv.addEmployee(id, name, title, dateAdded); //adds new employee to csv file
     }
+
     public int getId(){
         return id;
     } public void setId(int id){
@@ -32,6 +32,10 @@ public class Employee {
         return title;
     }public void setTitle(String role){
         this.title = role;
+    }
+
+    public LocalDate getDateAdded(){
+        return dateAdded;
     }
 
     public String toString(){
