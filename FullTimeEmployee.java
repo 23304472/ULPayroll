@@ -1,23 +1,15 @@
-//Emma
+import java.io.FileNotFoundException;
+import java.time.LocalDate;
+
 public class FullTimeEmployee extends Employee{
 
     private double hours;
 
-    public FullTimeEmployee(int id, String name, String title, double hours){
+    public FullTimeEmployee(int id, String name, String title, double hours) throws FileNotFoundException {
         super(id, name, title);
         this.hours = hours;
-    }
-
-    public String getName(){
-        return super.getName();
-    } public void setName(String name){
-        super.setName();
-    }
-
-    public String getTitle(){
-        return super.getTitle();
-    } public void setTitle(String title){
-        super.setTitle();
+        LocalDate dateAdded = LocalDate.now(); //stores date new employee is added
+        csv.addEmployee(id, name, title, dateAdded); //adds new employee to csv file
     }
 
     public double getHours(){
@@ -26,8 +18,10 @@ public class FullTimeEmployee extends Employee{
         this.hours = hours;
     }
 
-    public String getHourlyRate(){
-        //calls csv read fulltime file method
+    public double getHourlyRate(){
+
+        //call readSalary method on fulltime salary file
+        //casts to double so payslip can be calculated
     }
 
 
