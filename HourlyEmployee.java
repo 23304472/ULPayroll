@@ -1,32 +1,15 @@
-//Emma
+import java.io.FileNotFoundException;
+import java.time.LocalDate;
+
 public class HourlyEmployee extends Employee{
 
     private double hours;
 
-    public HourlyEmployee(){
-    }
-
-    public HourlyEmployee(int id, String name, String title, double hours){
+    public HourlyEmployee(int id, String name, String title, double hours) throws FileNotFoundException {
         super(id, name, title);
         this.hours = hours;
-    }
-
-    public int getId(){
-        return super.getId();
-    } public void setId(int id){
-        super.setId(id);
-    }
-
-    public String getName(){
-        return super.getName();
-    } public void setName(String name){
-        super.setName(name);
-    }
-
-    public String getTitle(){
-        return super.getTitle();
-    } public void setTitle(String title){
-        super.setTitle(title);
+        LocalDate dateAdded = LocalDate.now();
+        csv.addEmployee(id, name, title, dateAdded);
     }
 
     public double getHours(){
@@ -35,8 +18,9 @@ public class HourlyEmployee extends Employee{
         this.hours = hours;
     }
 
-    public String getHourlyRate(){
-        //calls csv read hourly file method
+    public double getHourlyRate(){
+        //calls readSalary method on hourly rate file
+        //casts to double for payslip calculations
     }
 
     //gets hourly salary from hourly csv file
