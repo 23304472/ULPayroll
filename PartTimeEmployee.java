@@ -1,33 +1,15 @@
+import java.io.FileNotFoundException;
+import java.time.LocalDate;
+
 public class PartTimeEmployee extends Employee {
 
     private double hours;
 
-    public PartTimeEmployee(int id, String name, String title, double hours){
+    public PartTimeEmployee(int id, String name, String title, double hours) throws FileNotFoundException {
         super(id, name, title);
         this.hours = hours;
-        //add to csv file
-    }
-
-    public PartTimeEmployee(){
-        super();
-    }
-
-    public int getId(){
-        return id;
-    } public void setId(int id){
-        this.id = id;
-    }
-
-    public String getName(){
-        return name;
-    } public void setName(String name){
-        this.name = name;
-    }
-
-    public String getTitle(){
-        return title;
-    } public void setTitle(String title){
-        this.title = title;
+        LocalDate dateAdded = LocalDate.now();
+        csv.addEmployee(id, name, title, dateAdded);
     }
 
     public double getHours(){
@@ -36,8 +18,9 @@ public class PartTimeEmployee extends Employee {
         this.hours = hours;
     }
 
-    public String getPartTimeRate(String title){
-        //calls csv read parttime file method
+    public double getPartTimeRate(String title){
+        //calls readSalary method on part-time file
+        //casts to double for payslip calculations
     }
 
     @Override
