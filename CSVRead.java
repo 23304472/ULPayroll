@@ -42,14 +42,14 @@ public class CSVRead {
     }
 
     public String[] readEmployeeDetails(Employee employee){
-        String header = input.nextLine();
-        while(input.hasNext()){
-            String[] tokens = getValues();
-            if(tokens[0].equals(employee.getId())){
-                return tokens;
+        String header = input.nextLine(); //skips header
+        while(input.hasNext()){ //while file has more info
+            String[] tokens = getValues(); //return current line values
+            if(tokens[0].equals(employee.getId())){ //if first column value == employees id
+                return tokens; //return full line (rest of details)
             }
         }
-        return new String[0];
+        return new String[0]; //return empty string
     }
 
 }
