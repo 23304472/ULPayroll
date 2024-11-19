@@ -8,8 +8,8 @@ public class PartTimeEmployee extends Employee {
     public PartTimeEmployee(int id, String name, String title, double hours) throws FileNotFoundException {
         super(id, name, title);
         this.hours = hours;
-        LocalDate dateAdded = LocalDate.now();
-        csv.addEmployee(id, name, title, dateAdded);
+        LocalDate dateAdded = LocalDate.now(); //stores date employee is added
+        csv.addEmployee(id, name, title, dateAdded); //adds to csv file
     }
 
     public double getHours(){
@@ -18,9 +18,9 @@ public class PartTimeEmployee extends Employee {
         this.hours = hours;
     }
 
-    public double getPartTimeRate(String title){
-        //calls readSalary method on part-time file
-        //casts to double for payslip calculations
+    public double getPartTimeRate(PartTimeEmployee employee) throws FileNotFoundException {
+        CSVRead csv = new CSVRead("PartTimeRates.csv");
+        return Double.parseDouble(csv.readSalary(employee));
     }
 
     @Override
