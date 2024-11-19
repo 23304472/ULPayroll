@@ -18,10 +18,9 @@ public class FullTimeEmployee extends Employee{
         this.hours = hours;
     }
 
-    public double getHourlyRate(){
-
-        //call readSalary method on fulltime salary file
-        //casts to double so payslip can be calculated
+    public double getFullTimeRate(Employee employee) throws FileNotFoundException{
+        CSVRead csv = new CSVRead("FullTimeRates.csv"); //starts read of fulltime salaries
+        return Double.parseDouble(csv.readSalary(employee)); //returns salary as double
     }
 
 
