@@ -1,8 +1,6 @@
 import java.util.Scanner;
 //Conor
 public class PayrollMenu {
-	//Employee arraylist
-	private static ArrayList<Employee> employees = new ArrayList<>();    
     
     public static void main(String[] args) {   
     	
@@ -24,15 +22,16 @@ public class PayrollMenu {
     
     //Employee 
     if(user_type == 0){
-    	    System.out.println("Employee Menu:");
+    	  System.out.println("Employee Menu:");
           System.out.println("(0) Access Personal Details");
           System.out.println("(1) View Current Month's Payslip");
           System.out.println("(2) View Historic Payslips");
 
           int choice = in.nextInt();
           if (choice == 0) {
-             System.out.println(Employee.toString());   //Getter methods or toString method?
-          } else if (choice == 1) {
+             System.out.println(emp.toString());     
+          } 
+          else if (choice == 1) {
              
           } else if (choice == 2) {
              
@@ -45,8 +44,11 @@ public class PayrollMenu {
     }
     
     //Human Resources
-    if(user_type == 2){
-      
+    if(user_type == 2) {
+    	
+    	
+    	
+    	
     }
     }
 }
