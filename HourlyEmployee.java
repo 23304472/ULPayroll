@@ -8,8 +8,8 @@ public class HourlyEmployee extends Employee{
     public HourlyEmployee(int id, String name, String title, double hours) throws FileNotFoundException {
         super(id, name, title);
         this.hours = hours;
-        LocalDate dateAdded = LocalDate.now();
-        csv.addEmployee(id, name, title, dateAdded);
+        LocalDate dateAdded = LocalDate.now(); //stores date employee is added
+        csv.addEmployee(id, name, title, dateAdded); //adds to csv file
     }
 
     public double getHours(){
@@ -18,9 +18,9 @@ public class HourlyEmployee extends Employee{
         this.hours = hours;
     }
 
-    public double getHourlyRate(){
-        //calls readSalary method on hourly rate file
-        //casts to double for payslip calculations
+    public double getHourlyRate(HourlyEmployee employee) throws FileNotFoundException {
+        CSVRead csv = new CSVRead("HourlyRates.csv"); //start read of hourly rates file
+        return Double.parseDouble(csv.readSalary(employee)); //returns rate as double
     }
 
     //gets hourly salary from hourly csv file
