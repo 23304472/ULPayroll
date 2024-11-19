@@ -3,8 +3,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 public class CSVWrite {
     PrintWriter writer;
@@ -14,33 +12,33 @@ public class CSVWrite {
     }
 
     public void addEmployee(int id, String name, String title, LocalDate dateAdded){
-        String employeeInfo = id + ", " + name + ", " + title + ", " + dateAdded;
+        String employeeInfo = id + ", " + name + ", " + title + ", " + dateAdded; //info to be added
         java.io.File file = new java.io.File("Employees.csv");
 
-        try (PrintWriter writer = new PrintWriter (new FileWriter("Employees.csv", true))){
-            if(file.length() == 0) {
-                String header = "ID, Name, Title, Date Added";
-                header += "\n";
+        try (PrintWriter writer = new PrintWriter (new FileWriter("Employees.csv", true))){ //'true' sets file to append mode
+            if(file.length() == 0) { //if file is empty
+                String header = "ID, Name, Title, Date Added"; //adds header
+                header += "\n"; //goes to next line
                 writer.write(header);
             }
-            writer.println(employeeInfo);
+            writer.println(employeeInfo); //adds employee info
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException(e); //returns runtime exception if new file cant be created
         }
     }
 
-    public static void addPayslip(double grossPay, double deductions, double netPay){
-        String paySlipInfo = grossPay + ", " + deductions + ", " + netPay;
+    public static void addPayslip(double grossPay, double prsiRate, double healthInsuranceRate, double uscRate, double unionFeesRate, double incomeTax, double netPay){
+        String paySlipInfo = grossPay + ", " + prsiRate + ", " + healthInsuranceRate + ", " + uscRate + ", " + unionFeesRate + ", " + incomeTax + ", " + netPay; //info to be added
 
-        java.io.File file = new java.io.File("Payslips.csv");
+        java.io.File file = new java.io.File("Payslips.csv"); //creates new file
 
-        try(PrintWriter writer = new PrintWriter (new FileWriter("Payslips.csv", true))){
-            if(file.length() == 0) {
-                String header = "Gross Pay, Deductions, Net Pay";
-                header += "\n";
-                writer.write(header);
+        try(PrintWriter writer = new PrintWriter (new FileWriter("Payslips.csv", true))){ //opens in append mode
+            if(file.length() == 0) { //if file is empty
+                String header = "Gross Pay, PRSI Rate, Health Insurance Rate, USC Rate, Union Fees Rate, Income Tax Rate, Net Pay"; //creates header
+                header += "\n"; //goes to next line
+                writer.write(header); //adds header
             }
-            writer.println(paySlipInfo);
+            writer.println(paySlipInfo); //adds payslip info
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
