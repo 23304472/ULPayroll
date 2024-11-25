@@ -2,6 +2,18 @@ import java.util.Scanner;
 //Conor
 public class PayrollMenu {
 
+	//payroll menu asks for employee id
+    //check if(passwordExists(employee id)){
+    //          if password == employee.getPassword(){          //if password matches the stored password
+    //              successful login (select next action)
+    //           } else {
+    //          throw exception to say incorrect password       
+    //          }
+    //} else if(!passwordExists(employee id){                   //if password does not exist for the given id
+    //          ask for new password                            //get user to set new password
+    //          employee.setPassword(given password)            //invoke setPassword to store new password
+    //}
+
 	private static boolean isDigitsOnly(String str) {
 		for (char c : str.toCharArray()) {
 			if (!Character.isDigit(c)) {
