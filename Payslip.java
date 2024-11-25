@@ -1,6 +1,6 @@
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
-//Shaun
+
 public class Payslip {
     private Employee employee;
     private LocalDate date;
@@ -12,12 +12,11 @@ public class Payslip {
     private double incomeTax;
     private double netPay;
 
-    //create constructor with new csvRead (throws exception if file does not exist
     public Payslip(Employee employee, CSVRead csvRead) throws FileNotFoundException {
         this.employee = employee;
         this.date = LocalDate.now();
 
-        //Use readSalary to get the gross pay
+        // Use readSalary to get the gross pay
         String salaryString = csvRead.readSalary(employee);
         if (salaryString != null) {
             this.grossPay = Double.parseDouble(salaryString);
@@ -26,7 +25,6 @@ public class Payslip {
         }
     }
 
-    //calculates the usc rate
     private void calculateUscRate() {
         if (grossPay < 12012) {
             uscRate = 0.005;             // if gross pay less than 12,012 tax is 0.5%
@@ -38,8 +36,6 @@ public class Payslip {
             uscRate = 0.08;              //greater than 70,044 is 8%
         }
     }
-
-    //calculates the income tax
     private void calculateIncomeTax() {
         double threshold = 42000;
         if (grossPay <= threshold) {
@@ -50,8 +46,6 @@ public class Payslip {
             incomeTax = lowerTax + upperTax;
         }
     }
-
-    //calcultes net pay after deductions
     public void calculateNetPay() {
         // 20% for everything below 42,000, 40% for everything above
         netPay = grossPay
@@ -61,19 +55,35 @@ public class Payslip {
                 - (grossPay * incomeTax)
                 - healthInsuranceRate;
     }
-   
-    //getters and setters for possible future use
+
     public Employee getEmployee() {
         return employee;
     }
-
     public LocalDate getDate() {
         return date;
     }
-
     public double getNetPay() {
         return netPay;
     }
+    public double getGrossPay() {
+        return grossPay;
+    }
+    public double getPrsiRate(){
+        return prsiRate;
+    }
+    public double getUscRate(){
+        return prsiRate;
+    }
+    public double getUnionFeesRate(){
+        return unionFeesRate;
+    }
+    public double getIncomeTax(){
+        return incomeTax;
+    }
+    public double getHealthInsuranceRate(){
+        return healthInsuranceRate;
+    }
+    
 
     @Override
     public String toString() {
@@ -87,4 +97,3 @@ public class Payslip {
                 "Net Pay: €" + netPay + "\n";
     }
 }
-// merged NetPay and Payslip into one class to simplify
