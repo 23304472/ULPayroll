@@ -10,7 +10,7 @@ public class PayrollMenu {
 		}
 		return true;
 	}
-	
+
 	public static void main(String[] args) {   
 
 
@@ -26,55 +26,60 @@ public class PayrollMenu {
 		//takes input
 		int user_type = in.nextInt();
 
+		//password system. should passwords be a variable attached to each user object?
+
 		//handles illegal inputs
 		if(user_type < 0 || user_type > 2){
 			throw new IllegalArgumentException("Please enter 0, 1, or 2");
 		}
 
-		//Employee 
+		//Employee
 		if(user_type == 0){
 			System.out.println("Employee Menu:");
 			System.out.println("(0) Access Personal Details");
 			System.out.println("(1) View Current Month's Payslip");
 			System.out.println("(2) View Historic Payslips");
-			System.out.println("(3) Back");
 
-			//password system
 
 			int choice = in.nextInt();
 			if (choice == 0) {
 				System.out.println(emp.toString());     
 			} 
 			else if (choice == 1) {
-
+				//view current months payslip
 			} else if (choice == 2) {
-
+				//view historic payslips
 			} else {
-				//Didn't choose an action
+				//Invalid input
 				System.out.println("Returning");  
 			}
 		}
 
-		
-		
-		
+
+
+
 		//Admin
 		if(user_type == 1){
 			System.out.println("Admin Menu:");
-			System.out.println("(0) Add Employee");
-			System.out.println("(1) Back");
+			System.out.println("(0) Add Full Time Employee");
+			System.out.println("(1) Add Hourly Employee");
+			System.out.println("(2) Add Part Time Employee");
 
 			int choice = in.nextInt();
-			if(choice == 0) { 
-				//adding new employee
-				//enter id
-				System.out.println("Please enter employee id");
-				String empId = in.next();
-				if (empId.length() == 5 && isDigitsOnly(empId)) {
-					System.out.println("Employee id is " + empId);
-				} else {
-					System.out.println("Invalid");
-				}
+
+			if(user_type < 0 || user_type > 2){
+				throw new IllegalArgumentException("Please enter 0, 1, or 2");
+			}
+
+			//adding new employee
+			//enter id
+			System.out.println("Please enter employee id");
+			int empId = in.nextInt();
+			if (empId.length() == 5 && isDigitsOnly(empId)) {
+				System.out.println("Employee id is " + empId);
+			} else {
+				//Invalid input
+				System.out.println("Returning");
 			}
 
 			//enter name
@@ -82,8 +87,32 @@ public class PayrollMenu {
 			String empName = in.next();
 			System.out.println("Employee name is " + empName);
 
-			else {
-				System.out.println("Returning");          
+			//enter title
+			System.out.println("Please enter employee title");
+			String empTitle = in.next();
+			System.out.println("Employee title is " + empTitle);
+
+			//enter hours for part time and hourly employees
+			double empHours;
+			if (choice != 0) {
+				System.out.println("Please enter the number of hours worked");
+				empHours = in.nextDouble();
+			}
+
+			//creating employees
+			try {
+				if (choice == 0) {  // Full-Time Employee
+					new FullTimeEmployee(empId, empName, empTitle, empHours);
+					System.out.println("Added Full-Time Employee");
+				} else if (choice == 1) {  // Hourly Employee
+					new HourlyEmployee(empId, empName, empTitle, empHours);
+					System.out.println("Added Hourly Employee");
+				} else if (choice == 2) {  // Part-Time Employee
+					new PartTimeEmployee(empId, empName, empTitle, empHours);
+					System.out.println("Added Part-Time Employee");
+				}
+			} catch (FileNotFoundException e) {
+				System.out.println("Error");
 			}
 		}
 
@@ -95,7 +124,6 @@ public class PayrollMenu {
 		if(user_type == 2) {
 			System.out.println("Human Resources Menu:");
 			System.out.println("(0) Implement Promotion for full-time staff");
-			System.out.println("(1) Back");
 
 			int choice = in.nextInt();
 			if(choice == 0) {
@@ -103,7 +131,6 @@ public class PayrollMenu {
 			} else {
 				System.out.println("Returning");
 			}
-
 		}
 
 
