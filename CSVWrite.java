@@ -1,19 +1,15 @@
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.time.LocalDate;
 
 public class CSVWrite {
-    PrintWriter writer;
 
-    public CSVWrite(String filename) throws FileNotFoundException{
-        writer = new PrintWriter(filename);
+    public CSVWrite(){
+        //constructor
     }
 
     public void addEmployee(int id, String name, String title, LocalDate dateAdded){
         String employeeInfo = id + ", " + name + ", " + title + ", " + dateAdded; //info to be added
-        java.io.File file = new java.io.File("Employees.csv");
+        File file = new File("Employees.csv"); //reference to file
 
         try (PrintWriter writer = new PrintWriter (new FileWriter("Employees.csv", true))){ //'true' sets file to append mode
             if(file.length() == 0) { //if file is empty
@@ -23,14 +19,14 @@ public class CSVWrite {
             }
             writer.println(employeeInfo); //adds employee info
         } catch (IOException e) {
-            throw new RuntimeException(e); //returns runtime exception if new file cant be created
+            System.err.println("IO error encountered"); //returns runtime exception if new file cant be created
         }
     }
 
-    public static void addPayslip(double grossPay, double prsiRate, double healthInsuranceRate, double uscRate, double unionFeesRate, double incomeTax, double netPay){
-        String paySlipInfo = grossPay + ", " + prsiRate + ", " + healthInsuranceRate + ", " + uscRate + ", " + unionFeesRate + ", " + incomeTax + ", " + netPay; //info to be added
+    public void addPayslip(Payslip payslip){
+        String paySlipInfo = payslip.getGrossPay() + ", " + payslip.getPrsiRate() + ", " + payslip.getHealthInsuranceRate() + ", " + payslip.getUscRate() + ", " + payslip.getUnionFeesRate() + ", " + payslip.getIncomeTax() + ", " + payslip.getNetPay(); //info to be added
 
-        java.io.File file = new java.io.File("Payslips.csv"); //creates new file
+        File file = new File("Payslips.csv"); //creates new file
 
         try(PrintWriter writer = new PrintWriter (new FileWriter("Payslips.csv", true))){ //opens in append mode
             if(file.length() == 0) { //if file is empty
@@ -40,13 +36,27 @@ public class CSVWrite {
             }
             writer.println(paySlipInfo); //adds payslip info
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.err.println("IO error encountered");
+        }
+    }
+
+    public void addPayClaimForm(int id, String title, double hours, LocalDate dateAdded){
+        String payClaimFormInfo = id + ", " + title + ", " + hours + ", " + dateAdded;
+        File file = new File("PayClaimForms.csv");//creates new file
+
+        try(PrintWriter writer = new PrintWriter(new FileWriter("PayClaimForms.csv", true))){
+            if(file.length() == 0){
+                String header = "ID, Title, Hours, Date Submitted"; //creates header
+                header += "\n"; //goes to next line
+                writer.write(header); //writes header
+            }
+            writer.println(payClaimFormInfo); //adds employee info
+        } catch (IOException e){
+            System.err.println("IO error encountered"); //handles error
         }
     }
 
 
 
-    //write to employee file
-    //write to payslip file
-    //set method should change value in csv file
+
 }
