@@ -83,4 +83,28 @@ public class Promotions {
         System.out.println("Previous salary was €" + oldSalary + ", new salary is €" + newSalary);
         return newGrade;
     }
+
+    public boolean pendingPromotion;
+
+    public boolean isPendingPromotion(FullTimeEmployee employee){
+        return pendingPromotion;
+    }
+
+    public boolean setPendingPromotion(boolean value){
+        pendingPromotion = value;
+        return pendingPromotion;
+    }
+
+    //for payroll menu
+    //to start a promotion admin uses setPendingPromotion to set pendingPromotion to true
+    //after employee user logs in,
+    //before user is prompted to select what actions to take (view payslips, view eployee details etc)
+    //check if(pendingPromotion){                                                        //check if theres a pending promotion
+    //        if (users next input = accepts){                                            //user is prompted to accept or reject promotion
+    //             Promotion.promote(employee title, employee grade);                    //implement promotion if employee accepts
+    //        } else { 
+    //                setPendingPromotion(false);                                        //set pendingPromotion to false if employee rejects
+    //} else if(!pendingPromotion){                                                       //if there is no pending promotion
+    //         continue with user actions (view employee details, request payslips etc)   //go to normal user activity
+    //}
 }
