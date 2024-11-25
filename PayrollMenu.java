@@ -2,6 +2,9 @@ import java.util.Scanner;
 //Conor
 public class PayrollMenu {
 
+	//these might work for implementing passwords and asking the user to accept promotions
+
+	
 	//payroll menu asks for employee id
     //check if(passwordExists(employee id)){
     //          if password == employee.getPassword(){          //if password matches the stored password
@@ -12,6 +15,19 @@ public class PayrollMenu {
     //} else if(!passwordExists(employee id){                   //if password does not exist for the given id
     //          ask for new password                            //get user to set new password
     //          employee.setPassword(given password)            //invoke setPassword to store new password
+    //}
+
+	//for payroll menu
+    //to start a promotion admin uses setPendingPromotion to set pendingPromotion to true
+    //after employee user logs in,
+    //before user is prompted to select what actions to take (view payslips, view eployee details etc)
+    //check if(pendingPromotion){                                                        //check if theres a pending promotion
+    //        if (users next input = accepts){                                            //user is prompted to accept or reject promotion
+    //             Promotion.promote(employee title, employee grade);                    //implement promotion if employee accepts
+    //        } else { 
+    //                setPendingPromotion(false);                                        //set pendingPromotion to false if employee rejects
+    //} else if(!pendingPromotion){                                                       //if there is no pending promotion
+    //         continue with user actions (view employee details, request payslips etc)   //go to normal user activity
     //}
 
 	private static boolean isDigitsOnly(String str) {
