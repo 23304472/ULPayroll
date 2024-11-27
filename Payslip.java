@@ -72,7 +72,7 @@ public class Payslip {
         return prsiRate;
     }
     public double getUscRate(){
-        return prsiRate;
+        return uscRate;
     }
     public double getUnionFeesRate(){
         return unionFeesRate;
