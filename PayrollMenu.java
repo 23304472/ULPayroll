@@ -16,16 +16,6 @@ public class PayrollMenu {
 	//         continue with user actions (view employee details, request payslips etc)   //go to normal user activity
 	//}
 
-
-	private static boolean isDigitsOnly(String str) {    //accepts string as input
-		for (char c : str.toCharArray()) {               //loops through each character
-			if (!Character.isDigit(c)) {                 //for each character, checks if it is a digit
-				return false;                            //returns false if there is a single non digit character
-			}
-		}
-		return true;
-	}
-
 	public static void main(String[] args) {   
 
 		//implements scanner
@@ -44,44 +34,44 @@ public class PayrollMenu {
 			throw new IllegalArgumentException("Please enter 0, 1, or 2");
 		}
 
+		
 		//Employee	
-		if(user_type == 0) {
-			System.out.println("Please enter employee id");
-			int empId = in.nextInt();
-			if(employee.passwordExists(empId)){    
-				System.out.println("Please enter password");
-				String password = in.next();
-				if(password == employee.getPassword()) {    //if password matches the stored password
+		if (user_type == 0) {
+		    System.out.println("Please enter employee id");
+		    int empId = in.nextInt();
+		    if (employee.passwordExists(empId)) {    
+		        System.out.println("Please enter password");
+		        String password = in.next();
+		        if (password == employee.getPassword()) {    //if password matches the stored password
 
-					//login successful
-					System.out.println("Employee Menu:");
-					System.out.println("(0) Access Personal Details");
-					System.out.println("(1) View Current Month's Payslip");
-					System.out.println("(2) View Historic Payslips");
+		            //login successful
+		            System.out.println("Employee Menu:");
+		            System.out.println("(0) Access Personal Details");
+		            System.out.println("(1) View Current Month's Payslip");
+		            System.out.println("(2) View Historic Payslips");
 
-					int choice = in.nextInt();
-					if (choice == 0) {
-						System.out.println(employee.toString());     
-					} 
-					else if (choice == 1) {
-						//view current months payslip
-					} else if (choice == 2) {
-						//view historic payslips
-					} else {
-						//invalid input
-						System.out.println("Returning");  
-					}
-				}
-
-
-			} else {
-				throw exception to say incorrect password       
-			}
-			else if(!passwordExists(employee id){               //if password does not exist for the given id
-				ask for new password                            //get user to set new password
-				employee.setPassword(given password)            //invoke setPassword to store new password
-			}
+		            int choice = in.nextInt();
+		            if (choice == 0) {
+		                System.out.println(employee.toString());     
+		            } else if (choice == 1) {
+		                //view current months payslip
+		            } else if (choice == 2) {
+		                //view historic payslips
+		            } else {
+		                //invalid input
+		                System.out.println("Returning");  
+		            }
+		        }
+		    } else if (!employee.passwordExists(empId)) { //if password does not exist for the given id
+		        //ask for new password
+		        System.out.println("Please enter a new password");
+		        String newPassword = in.next();
+		        employee.setPassword(newPassword); //invoke setPassword to store new password
+		    } else {
+		        throw new IllegalArgumentException("Incorrect Password");
+		    }
 		}
+
 
 
 		//Admin
@@ -101,11 +91,11 @@ public class PayrollMenu {
 			//enter id
 			System.out.println("Please enter employee id");
 			int empId = in.nextInt();
-			if (empId.length() == 5 && isDigitsOnly(empId)) {   //checks if Id provided is exactly 5 digits
+			if (empId >= 10000 && empId <= 99999) {   //checks if Id provided is exactly 5 digits
 				System.out.println("Employee id is " + empId);
 			} else {
 				//invalid input
-				System.out.println("Returning");
+				System.out.println("Invalid id, must be exactly 5 digits");
 			}
 
 			//enter name
