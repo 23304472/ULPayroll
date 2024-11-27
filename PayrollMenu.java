@@ -1,46 +1,32 @@
 import java.util.Scanner;
+import java.io.FileNotFoundException;
 //Conor
 public class PayrollMenu {
 
-	//these might work for implementing passwords and asking the user to accept promotions
-
-	
-	//payroll menu asks for employee id
-    //check if(passwordExists(employee id)){
-    //          if password == employee.getPassword(){          //if password matches the stored password
-    //              successful login (select next action)
-    //           } else {
-    //          throw exception to say incorrect password       
-    //          }
-    //} else if(!passwordExists(employee id){                   //if password does not exist for the given id
-    //          ask for new password                            //get user to set new password
-    //          employee.setPassword(given password)            //invoke setPassword to store new password
-    //}
-
 	//for payroll menu
-    //to start a promotion admin uses setPendingPromotion to set pendingPromotion to true
-    //after employee user logs in,
-    //before user is prompted to select what actions to take (view payslips, view eployee details etc)
-    //check if(pendingPromotion){                                                        //check if theres a pending promotion
-    //        if (users next input = accepts){                                            //user is prompted to accept or reject promotion
-    //             Promotion.promote(employee title, employee grade);                    //implement promotion if employee accepts
-    //        } else { 
-    //                setPendingPromotion(false);                                        //set pendingPromotion to false if employee rejects
-    //} else if(!pendingPromotion){                                                       //if there is no pending promotion
-    //         continue with user actions (view employee details, request payslips etc)   //go to normal user activity
-    //}
+	//to start a promotion admin uses setPendingPromotion to set pendingPromotion to true
+	//after employee user logs in,
+	//before user is prompted to select what actions to take (view payslips, view eployee details etc)
+	//check if(pendingPromotion){                                                        //check if theres a pending promotion
+	//        if (users next input = accepts){                                            //user is prompted to accept or reject promotion
+	//             Promotion.promote(employee title, employee grade);                    //implement promotion if employee accepts
+	//        } else { 
+	//                setPendingPromotion(false);                                        //set pendingPromotion to false if employee rejects
+	//} else if(!pendingPromotion){                                                       //if there is no pending promotion
+	//         continue with user actions (view employee details, request payslips etc)   //go to normal user activity
+	//}
 
-	private static boolean isDigitsOnly(String str) {
-		for (char c : str.toCharArray()) {
-			if (!Character.isDigit(c)) {
-				return false;
+
+	private static boolean isDigitsOnly(String str) {    //accepts string as input
+		for (char c : str.toCharArray()) {               //loops through each character
+			if (!Character.isDigit(c)) {                 //for each character, checks if it is a digit
+				return false;                            //returns false if there is a single non digit character
 			}
 		}
 		return true;
 	}
 
 	public static void main(String[] args) {   
-
 
 		//implements scanner
 		Scanner in = new Scanner(System.in);
@@ -50,40 +36,52 @@ public class PayrollMenu {
 		System.out.println("(1) Admin");
 		System.out.println("(2) Human Resources");
 
-
 		//takes input
 		int user_type = in.nextInt();
-
-		//password system. should passwords be a variable attached to each user object?
 
 		//handles illegal inputs
 		if(user_type < 0 || user_type > 2){
 			throw new IllegalArgumentException("Please enter 0, 1, or 2");
 		}
 
-		//Employee
-		if(user_type == 0){
-			System.out.println("Employee Menu:");
-			System.out.println("(0) Access Personal Details");
-			System.out.println("(1) View Current Month's Payslip");
-			System.out.println("(2) View Historic Payslips");
+		//Employee	
+		if(user_type == 0) {
+			System.out.println("Please enter employee id");
+			int empId = in.nextInt();
+			if(employee.passwordExists(empId)){    
+				System.out.println("Please enter password");
+				String password = in.next();
+				if(password == employee.getPassword()) {    //if password matches the stored password
+
+					//login successful
+					System.out.println("Employee Menu:");
+					System.out.println("(0) Access Personal Details");
+					System.out.println("(1) View Current Month's Payslip");
+					System.out.println("(2) View Historic Payslips");
+
+					int choice = in.nextInt();
+					if (choice == 0) {
+						System.out.println(employee.toString());     
+					} 
+					else if (choice == 1) {
+						//view current months payslip
+					} else if (choice == 2) {
+						//view historic payslips
+					} else {
+						//invalid input
+						System.out.println("Returning");  
+					}
+				}
 
 
-			int choice = in.nextInt();
-			if (choice == 0) {
-				System.out.println(emp.toString());     
-			} 
-			else if (choice == 1) {
-				//view current months payslip
-			} else if (choice == 2) {
-				//view historic payslips
 			} else {
-				//Invalid input
-				System.out.println("Returning");  
+				throw exception to say incorrect password       
+			}
+			else if(!passwordExists(employee id){               //if password does not exist for the given id
+				ask for new password                            //get user to set new password
+				employee.setPassword(given password)            //invoke setPassword to store new password
 			}
 		}
-
-
 
 
 		//Admin
@@ -99,14 +97,14 @@ public class PayrollMenu {
 				throw new IllegalArgumentException("Please enter 0, 1, or 2");
 			}
 
-			//adding new employee
+			//adding new employee 
 			//enter id
 			System.out.println("Please enter employee id");
 			int empId = in.nextInt();
-			if (empId.length() == 5 && isDigitsOnly(empId)) {
+			if (empId.length() == 5 && isDigitsOnly(empId)) {   //checks if Id provided is exactly 5 digits
 				System.out.println("Employee id is " + empId);
 			} else {
-				//Invalid input
+				//invalid input
 				System.out.println("Returning");
 			}
 
@@ -129,23 +127,20 @@ public class PayrollMenu {
 
 			//creating employees
 			try {
-				if (choice == 0) {  // Full-Time Employee
+				if (choice == 0) {  // full-Time Employee
 					new FullTimeEmployee(empId, empName, empTitle, empHours);
 					System.out.println("Added Full-Time Employee");
-				} else if (choice == 1) {  // Hourly Employee
+				} else if (choice == 1) {  // hourly Employee
 					new HourlyEmployee(empId, empName, empTitle, empHours);
 					System.out.println("Added Hourly Employee");
-				} else if (choice == 2) {  // Part-Time Employee
+				} else if (choice == 2) {  // part-Time Employee
 					new PartTimeEmployee(empId, empName, empTitle, empHours);
 					System.out.println("Added Part-Time Employee");
 				}
-			} catch (FileNotFoundException e) {
-				System.out.println("Error");
+			} catch (FileNotFoundException e) {                     
+				System.out.println("Error: File not found");        //Handles FileNotFound exceptions while attempting to create employees 
 			}
 		}
-
-
-
 
 
 		//Human Resources
@@ -161,33 +156,6 @@ public class PayrollMenu {
 			}
 		}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	}
-
 }
+
