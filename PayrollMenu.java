@@ -18,6 +18,8 @@ public class PayrollMenu {
 
 	public static void main(String[] args) {   
 
+
+
 		//implements scanner
 		Scanner in = new Scanner(System.in);
 
@@ -34,42 +36,42 @@ public class PayrollMenu {
 			throw new IllegalArgumentException("Please enter 0, 1, or 2");
 		}
 
-		
+
 		//Employee	
 		if (user_type == 0) {
-		    System.out.println("Please enter employee id");
-		    int empId = in.nextInt();
-		    if (employee.passwordExists(empId)) {    
-		        System.out.println("Please enter password");
-		        String password = in.next();
-		        if (password == employee.getPassword()) {    //if password matches the stored password
+			System.out.println("Please enter employee id");
+			int empId = in.nextInt();
+			if (employee.passwordExists(empId)) {    
+				System.out.println("Please enter password");
+				String password = in.next();
+				if (password == employee.getPassword()) {    //if password matches the stored password
 
-		            //login successful
-		            System.out.println("Employee Menu:");
-		            System.out.println("(0) Access Personal Details");
-		            System.out.println("(1) View Current Month's Payslip");
-		            System.out.println("(2) View Historic Payslips");
+					//login successful
+					System.out.println("Employee Menu:");
+					System.out.println("(0) Access Personal Details");
+					System.out.println("(1) View Current Month's Payslip");
+					System.out.println("(2) View Historic Payslips");
 
-		            int choice = in.nextInt();
-		            if (choice == 0) {
-		                System.out.println(employee.toString());     
-		            } else if (choice == 1) {
-		                //view current months payslip
-		            } else if (choice == 2) {
-		                //view historic payslips
-		            } else {
-		                //invalid input
-		                System.out.println("Returning");  
-		            }
-		        }
-		    } else if (!employee.passwordExists(empId)) { //if password does not exist for the given id
-		        //ask for new password
-		        System.out.println("Please enter a new password");
-		        String newPassword = in.next();
-		        employee.setPassword(newPassword); //invoke setPassword to store new password
-		    } else {
-		        throw new IllegalArgumentException("Incorrect Password");
-		    }
+					int choice = in.nextInt();
+					if (choice == 0) {
+						System.out.println(employee.toString());     
+					} else if (choice == 1) {
+						//view current months payslip
+					} else if (choice == 2) {
+						//view historic payslips
+					} else {
+						//invalid input
+						System.out.println("Returning");  
+					}
+				}
+			} else if (!employee.passwordExists(empId)) { //if password does not exist for the given id
+				//ask for new password
+				System.out.println("Please enter a new password");
+				String newPassword = in.next();
+				employee.setPassword(newPassword); //invoke setPassword to store new password
+			} else {
+				throw new IllegalArgumentException("Incorrect Password");
+			}
 		}
 
 
@@ -128,7 +130,7 @@ public class PayrollMenu {
 					System.out.println("Added Part-Time Employee");
 				}
 			} catch (FileNotFoundException e) {                     
-				System.out.println("Error: File not found");        //Handles FileNotFound exceptions while attempting to create employees 
+				System.out.println("Error: File not found");  //Handles FileNotFound exceptions while attempting to create employees 
 			}
 		}
 
