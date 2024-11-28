@@ -5,8 +5,8 @@ public class PayrollMenu {
 
 	public static void main(String[] args) {   
 
-		Employee[] employee = new Employee[5]; 
-		FullTimeEmployee emp1 = new FullTimeEmployee(12345, "Michael Watson", "Lecturer", 40); //test employee
+		Employee[] employee = new Employee[5];
+		FullTimeEmployee emp1 = new FullTimeEmployee(12345, "Michael Watson", "Lecturer", null);
 		employee[0] = emp1;
 
 		//implements scanner
@@ -32,7 +32,7 @@ public class PayrollMenu {
 			if (employee[0].passwordExists(empId)) {    
 				System.out.println("Please enter password");
 				String password = in.next();
-				if (password == employee[0].getPassword()) {    //if password matches the stored password
+				if (password.equals(employee[0].getPassword())) {    //if password matches the stored password
 
 					//login successful
 					//first check if there is a pending promotion
@@ -52,7 +52,7 @@ public class PayrollMenu {
 							}
 
 							if (promotionChoice == 0) {         
-								Promotions.promote(employee[0].getTitle(), employee[0]); // implement promotion if employee accepts
+								Promotions.promote(employee[0].getTitle(), ); // implement promotion if employee accepts
 								validChoice = true; // exit the loop as the choice is valid
 							} else if (promotionChoice == 1) { 
 								System.out.println("Are you sure you want to reject the promotion?");
@@ -77,106 +77,108 @@ public class PayrollMenu {
 								}
 							}
 						}
-					
-					//continue with employee menu if there is no pending promotion
-					System.out.println("Employee Menu:");
-					System.out.println("(0) Access Personal Details");
-					System.out.println("(1) View Current Month's Payslip");
-					System.out.println("(2) View Historic Payslips");
 
-					int choice = in.nextInt();
-					if (choice == 0) {
-						System.out.println(employee[0].toString());     
-					} else if (choice == 1) {
-						//view current months payslip
-					} else if (choice == 2) {
-						//view historic payslips
-					} else {
-						//invalid input
-						System.out.println("Returning");  
+						//continue with employee menu if there is no pending promotion
+						System.out.println("Employee Menu:");
+						System.out.println("(0) Access Personal Details");
+						System.out.println("(1) View Current Month's Payslip");
+						System.out.println("(2) View Historic Payslips");
+
+						int choice = in.nextInt();
+						if (choice == 0) {
+							System.out.println(employee[0].toString());     
+						} else if (choice == 1) {
+							//view current months payslip
+						} else if (choice == 2) {
+							//view historic payslips
+						} else {
+							//invalid input
+							System.out.println("Returning");  
+						}
 					}
+				} else if (!employee[0].passwordExists(empId)) { //if password does not exist for the given id
+					//ask for new password
+					System.out.println("Please enter a new password");
+					String newPassword = in.next();
+					employee[0].setPassword(newPassword); //invoke setPassword to store new password
+				} else {
+					throw new IllegalArgumentException("Incorrect Password");
 				}
-			} else if (!employee[0].passwordExists(empId)) { //if password does not exist for the given id
-				//ask for new password
-				System.out.println("Please enter a new password");
-				String newPassword = in.next();
-				employee[0].setPassword(newPassword); //invoke setPassword to store new password
+			}
+		}
+
+		//Admin
+		if(user_type == 1) {
+			System.out.println("Admin Menu:");
+			System.out.println("(0) Add Full Time Employee");
+			System.out.println("(1) Add Hourly Employee");
+			System.out.println("(2) Add Part Time Employee");
+
+			int choice = in.nextInt();
+
+			if(user_type < 0 || user_type > 2) {
+				throw new IllegalArgumentException("Please enter 0, 1, or 2");
+			}
+
+			//adding new employee 
+			//enter id
+			System.out.println("Please enter employee id");
+			int empId = in.nextInt();
+			if (empId >= 10000 && empId <= 99999) {   //checks if Id provided is exactly 5 digits
+				System.out.println("Employee id is " + empId);
 			} else {
-				throw new IllegalArgumentException("Incorrect Password");
+				//invalid input
+				System.out.println("Invalid id, must be exactly 5 digits");
+			}
+
+			//enter name
+			System.out.println("Please enter employee name");
+			String empName = in.next();
+			System.out.println("Employee name is " + empName);
+
+			//enter title
+			System.out.println("Please enter employee title");
+			String empTitle = in.next();
+			System.out.println("Employee title is " + empTitle);
+
+			//enter hours for part time and hourly employees
+			double empHours;
+			if (choice != 0) {
+				System.out.println("Please enter the number of hours worked");
+				empHours = in.nextDouble();
+			}
+
+			//creating employees
+			try {
+				if (choice == 0) {  // full-Time Employee
+					new FullTimeEmployee(empId, empName, empTitle, );
+					System.out.println("Added Full-Time Employee");
+				} else if (choice == 1) {  // hourly Employee
+					new HourlyEmployee(empId, empName, empTitle, empHours);
+					System.out.println("Added Hourly Employee");
+				} else if (choice == 2) {  // part-Time Employee
+					new PartTimeEmployee(empId, empName, empTitle, empHours);
+					System.out.println("Added Part-Time Employee");
+				}
+			} catch (FileNotFoundException e) {                     
+				System.out.println("Error: File not found"); //Handles FileNotFound exceptions while attempting to create employees 
 			}
 		}
-	}
 
-	//Admin
-	if(user_type == 1) {
-		System.out.println("Admin Menu:");
-		System.out.println("(0) Add Full Time Employee");
-		System.out.println("(1) Add Hourly Employee");
-		System.out.println("(2) Add Part Time Employee");
 
-		int choice = in.nextInt();
+		//Human Resources
+		if(user_type == 2) {
+			System.out.println("Human Resources Menu:");
 
-		if(user_type < 0 || user_type > 2) {
-			throw new IllegalArgumentException("Please enter 0, 1, or 2");
-		}
+			int choice = in.nextInt();
+			if(choice == 0) {
 
-		//adding new employee 
-		//enter id
-		System.out.println("Please enter employee id");
-		int empId = in.nextInt();
-		if (empId >= 10000 && empId <= 99999) {   //checks if Id provided is exactly 5 digits
-			System.out.println("Employee id is " + empId);
-		} else {
-			//invalid input
-			System.out.println("Invalid id, must be exactly 5 digits");
-		}
-
-		//enter name
-		System.out.println("Please enter employee name");
-		String empName = in.next();
-		System.out.println("Employee name is " + empName);
-
-		//enter title
-		System.out.println("Please enter employee title");
-		String empTitle = in.next();
-		System.out.println("Employee title is " + empTitle);
-
-		//enter hours for part time and hourly employees
-		double empHours;
-		if (choice != 0) {
-			System.out.println("Please enter the number of hours worked");
-			empHours = in.nextDouble();
-		}
-
-		//creating employees
-		try {
-			if (choice == 0) {  // full-Time Employee
-				new FullTimeEmployee(empId, empName, empTitle, empHours);
-				System.out.println("Added Full-Time Employee");
-			} else if (choice == 1) {  // hourly Employee
-				new HourlyEmployee(empId, empName, empTitle, empHours);
-				System.out.println("Added Hourly Employee");
-			} else if (choice == 2) {  // part-Time Employee
-				new PartTimeEmployee(empId, empName, empTitle, empHours);
-				System.out.println("Added Part-Time Employee");
 			}
-		} catch (FileNotFoundException e) {                     
-			System.out.println("Error: File not found"); //Handles FileNotFound exceptions while attempting to create employees 
+			else {
+				System.out.println("Returning");
+			}
 		}
+
+
 	}
-
-	
-	//Human Resources
-	if(user_type == 2) {
-		System.out.println("Human Resources Menu:");
-		System.out.println("(0) Implement Promotion for full-time staff");
-
-		int choice = in.nextInt();
-		if(choice == 0) {
-
-		}
-	} else {
-		System.out.println("Returning");
-	}
-}
 }
