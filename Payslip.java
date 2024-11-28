@@ -102,3 +102,22 @@ public class Payslip {
                 "Net Pay: €" + formattedNetPay + "\n";
     }
 }
+
+    /*
+    TEST CODE FOR PAYSLIP
+    public static void main(String[] args) {
+        // Create a test Employee
+        Employee employee = new Employee(1, "Shaun Purcell");  // basic employee
+        double grossPay = 75000.0;  // Example gross pay
+
+        try {
+            // Create a Payslip object
+            Payslip payslip = new Payslip(employee, grossPay);
+            // Print out the payslip details
+            System.out.println(payslip);
+        } catch (FileNotFoundException e) {
+            System.err.println("Error reading salary information: " + e.getMessage());
+        }
+    }
+}
+*/
