@@ -6,7 +6,7 @@ public class PayrollMenu {
 	public static void main(String[] args) {   
 
 		Employee[] employee = new Employee[5]; 
-		FullTimeEmployee emp1 = new FullTimeEmployee(12345, "Michael Watson", "Lecturer", 40);   //test employee
+		FullTimeEmployee emp1 = new FullTimeEmployee(12345, "Michael Watson", "Lecturer", 40); //test employee
 		employee[0] = emp1;
 
 		//implements scanner
@@ -52,7 +52,7 @@ public class PayrollMenu {
 							}
 
 							if (promotionChoice == 0) {         
-								Promotions.promote(employee[0].getTitle(), employee[0].); // implement promotion if employee accepts
+								Promotions.promote(employee[0].getTitle(), employee[0]); // implement promotion if employee accepts
 								validChoice = true; // exit the loop as the choice is valid
 							} else if (promotionChoice == 1) { 
 								System.out.println("Are you sure you want to reject the promotion?");
