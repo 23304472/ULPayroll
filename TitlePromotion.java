@@ -22,3 +22,11 @@ public class TitlePromotion {
         return "Employee has been promoted to "+ newTitle + "with a new salary of" + newSalary;
     }
 }
+
+//Test for title promotion
+public class TitlePromotionTest{
+    public static void main(String[] args){
+        TitlePromotion titlePromotion = new TitlePromotion();
+        titlePromotion.promoteToNewTitle("Associate Professor A", "Professor", 9);
+    }
+}
