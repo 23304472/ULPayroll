@@ -105,3 +105,19 @@ public class Promotions {
         return newGrade;
     }
 }
+
+//Test for Promotions-Ava 
+public class promotionsTest {
+    public static void main(String[] args) throws IOException {
+        if (LocalDate.now().getMonthValue() == 10) {
+            Promotions promotions = new Promotions();
+            promotions.loadPayScaleFromCSV("FullTimeRates.csv");
+            promotions.promote("Lecturer", 1);
+            promotions.promote("Sub Librarian", 2);
+        }else{
+            System.out.println("Request failed. Employee can only be promoted in October");
+        }
+    }
+}
+
+
