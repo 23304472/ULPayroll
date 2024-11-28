@@ -5,11 +5,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CSVRead {
+
+    private final String filePath;
+
     Scanner input; //scanner object for reading file
 
-    public CSVRead(String filename) throws FileNotFoundException{
-        input = new Scanner(new File(filename));
-    } // opens file for reading
+    public CSVRead(String filePath) {
+        this.filePath = filePath;
+    }
 
     public String[] getValues(){
         String[] tokens; //new array
@@ -27,17 +30,35 @@ public class CSVRead {
     }
 
     //assumes file is of form tokens[0] = title, tokens[1] = scale number(years), tokens[2] = salary rate
-    public String readSalary(Employee employee){
-        String line  = input.nextLine(); //skips header line
-        while(input.hasNext()){ //while there is more data in file
-            String[] tokens = getValues();
-            if((tokens[0].equals(employee.getTitle())) && (Integer.parseInt(tokens[1]) == (ChronoUnit.YEARS.between(employee.getDateAdded(), LocalDate.now())))){
-                //check if tokens[0] (title column) = employees title
-                // check if scale point value matches the difference in years between when employee was created and the time now
-                return tokens[2]; //return tokens[2] (salary value)
+   public String readSalary(String title, int scalePoint) throws FileNotFoundException {
+        try (Scanner scanner = new Scanner(new File(filePath))) {
+            // Skip the header row
+            if (scanner.hasNextLine()) {
+                scanner.nextLine();  // This skips the first row (header)
             }
+
+            //iterate through the rest of the rows
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] parts = line.split(","); // Assumes CSV is comma-separated
+                if (parts.length == 3) {
+                    String payscaleDescription = parts[0].trim();
+                    int fileScalePoint = Integer.parseInt(parts[1].trim());
+                    String annualRate = parts[2].trim();
+
+                    //match the title and scale point
+                    if (payscaleDescription.equals(title) && fileScalePoint == scalePoint) {
+                        return annualRate; // Return the matching salary
+                    }
+                }
+            }
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException("CSV file not found at " + filePath);
+        } catch (Exception e) {
+            System.err.println("Error reading salary: " + e.getMessage());
         }
-        return null;
+
+        throw new FileNotFoundException("No matching salary found for title: " + title + " and scale point: " + scalePoint);
     }
 
     public String[] readEmployeeDetails(Employee employee){
@@ -52,13 +73,14 @@ public class CSVRead {
         return new String[0];
     }
 
-    public String[] getMostRecentPayslip(Employee employee){
+    public String[] getMostRecentPayslip(Employee employee) {
         String header = input.nextLine();
 
-        if(!input.hasNext()){
-            String[] currentTokens = getValues();
-            return currentTokens;
+        String[] currentTokens = null;
+        if (!input.hasNext()) {
+            currentTokens = getValues();
         }
+        return currentTokens;
     }
 
     public void close(){
