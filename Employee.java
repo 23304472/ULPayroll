@@ -10,7 +10,6 @@ public class Employee {
     private String title;
     private LocalDate dateAdded;
     private String password;
-    private double hoursWorked;
     private HashMap<Integer, String> passwords;
     CSVWrite csv = new CSVWrite(); //
 
@@ -64,9 +63,7 @@ public class Employee {
         } else throw new IllegalArgumentException("Invalid password, must be at least 8 characters and contain a symbol and number");
     }
     
-    public void setHoursWorked(double hoursWorked) {
-        this.hoursWorked = hoursWorked;
-    }
+  
 
     public boolean isValid(String password){
         boolean isValid = true;
@@ -89,7 +86,6 @@ public class Employee {
         return "Employee: " + id + "\n" +
                 "Name: " + name + "\n" +
                 "Title: " + title + "\n" +
-                "Hours worked: " + hoursWorked + "\n";
     }
 
 }
