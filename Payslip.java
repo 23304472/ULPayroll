@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
+import java.text.DecimalFormat;
 
 public class Payslip {
     private Employee employee;
@@ -87,13 +88,17 @@ public class Payslip {
 
     @Override
     public String toString() {
+        DecimalFormat df = new DecimalFormat("###,###.00");  // Format to 2 decimal places
+        String formattedNetPay = df.format(netPay);
         return "PaySlip Details:\n" +
                 "Employee ID: " + employee.getId() + "\n" +
                 "Name: " + employee.getName() + "\n" +
                 "Date: " + date + "\n" +
                 "Gross Pay: €" + grossPay + "\n" +
+                "PRSI Rate: " + (prsiRate * 100) + "%\n" +
                 "Income Tax: €" + incomeTax + "\n" +
                 "USC Rate: " + (uscRate * 100) + "%\n" +
-                "Net Pay: €" + netPay + "\n";
+                "Union Fees Rate: " + (unionFeesRate * 100) + "%\n" +
+                "Net Pay: €" + formattedNetPay + "\n";
     }
 }
