@@ -87,6 +87,14 @@ public class Employee {
                 "Name: " + name + "\n" +
                 "Title: " + title + "\n" +
     }
+    
+    public boolean isPendingPromotion(){
+        return pendingPromotion;
+    }
+
+    public void setPendingPromotion(boolean pendingPromotion){
+        this.pendingPromotion = pendingPromotion;
+    }
 
 }
 /*
