@@ -18,10 +18,13 @@ public class HourlyEmployee extends Employee{
         this.hours = hours;
     }
 
-    public double getHourlyRate(HourlyEmployee employee) throws FileNotFoundException {
+    public double getHourlyRate() throws FileNotFoundException {
         CSVRead csv = new CSVRead("HourlyRates.csv"); //start read of hourly rates file
-        return Double.parseDouble(csv.readSalary(employee)); //returns rate as double
+        String title = this.getTitle();
+        int scalePoint = this.getPayGrade();
+        return Double.parseDouble(csv.readSalary(title, scalePoint)); //returns rate as double
     }
+
 
     //gets hourly salary from hourly csv file
     @Override
