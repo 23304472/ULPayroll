@@ -10,6 +10,8 @@ public class Employee {
     private String title;
     private LocalDate dateAdded;
     private String password;
+    private static boolean isPendingPromotion;
+    private int payGrade;
     private HashMap<Integer, String> passwords;
     CSVWrite csv = new CSVWrite(); //
 
@@ -48,6 +50,14 @@ public class Employee {
         //needs to update csv file
     }
 
+    public int getPayGrade(){
+        return payGrade;
+    }
+
+    public void setPayGrade(int payGrade){
+        this.payGrade = payGrade;
+    }
+
     public LocalDate getDateAdded() {
         return dateAdded;
     }
@@ -62,8 +72,8 @@ public class Employee {
             passwords.put(id, password); //adds to hashmap linked with employee id
         } else throw new IllegalArgumentException("Invalid password, must be at least 8 characters and contain a symbol and number");
     }
-    
-  
+
+
 
     public boolean isValid(String password){
         boolean isValid = true;
@@ -79,21 +89,21 @@ public class Employee {
 
     public boolean passwordExists(int id){
         return passwords.containsKey(id);
-         
+
     }
 
     public String toString(){
         return "Employee: " + id + "\n" +
                 "Name: " + name + "\n" +
-                "Title: " + title + "\n" +
+                "Title: " + title + "\n" ;
     }
-    
-    public boolean isPendingPromotion(){
-        return pendingPromotion;
+
+    public static boolean isPendingPromotion(){
+        return isPendingPromotion;
     }
 
     public void setPendingPromotion(boolean pendingPromotion){
-        this.pendingPromotion = pendingPromotion;
+        this.isPendingPromotion = pendingPromotion;
     }
 
 }
