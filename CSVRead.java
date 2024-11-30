@@ -30,7 +30,7 @@ public class CSVRead {
     }
 
     //assumes file is of form tokens[0] = title, tokens[1] = scale number(years), tokens[2] = salary rate
-   public String readSalary(String title, int scalePoint) throws FileNotFoundException {
+    public String readSalary(String title, int scalePoint) throws FileNotFoundException {
         try (Scanner scanner = new Scanner(new File(filePath))) {
             // Skip the header row
             if (scanner.hasNextLine()) {
@@ -59,6 +59,12 @@ public class CSVRead {
         }
 
         throw new FileNotFoundException("No matching salary found for title: " + title + " and scale point: " + scalePoint);
+    }
+
+    public String readSalary(Employee employee) throws FileNotFoundException {
+        String title = employee.getTitle();
+        int scalePoint = employee.getPayGrade();
+        return readSalary(title, scalePoint);
     }
 
     public String[] readEmployeeDetails(Employee employee){
