@@ -55,8 +55,8 @@ public class PayrollMenu {
                 if (Employee.isPendingPromotion()) {    //if password matches the stored password
                     //login successful
                     //first check if there is a pending promotion
-                    boolean validChoice = false; // flag to determine if a valid choice has been made
-                    while (!validChoice) { // loop until a valid choice is made
+                    boolean validChoice = false; //flag to determine if a valid choice has been made
+                    while (!validChoice) { //loop until a valid choice is made
                         System.out.println("You have been offered a promotion");
                         System.out.println("(0) Accept Promotion");
                         System.out.println("(1) Reject Promotion");
@@ -65,10 +65,10 @@ public class PayrollMenu {
 
 
                         if (promotionChoice == 0) {
-                            int newGrade = Promotions.promote(loggedInEmployee.getTitle(), loggedInEmployee.getPayGrade()); // implement promotion if employee accepts
+                            int newGrade = Promotions.promote(loggedInEmployee.getTitle(), loggedInEmployee.getPayGrade()); //implement promotion if employee accepts
                             loggedInEmployee.setPayGrade(newGrade);
                             loggedInEmployee.setPendingPromotion(false);
-                            validChoice = true; // exit the loop as the choice is valid
+                            validChoice = true; //exit the loop as the choice is valid
                         } else if (promotionChoice == 1) {
                             System.out.println("Are you sure you want to reject the promotion?");
                             System.out.println("(0) Yes");
@@ -77,12 +77,12 @@ public class PayrollMenu {
                             int rejectionChoice = in.nextInt();
 
                             if (rejectionChoice == 0) {
-                                loggedInEmployee.setPendingPromotion(false); // set pendingPromotion to false if employee rejects
+                                loggedInEmployee.setPendingPromotion(false); //set pendingPromotion to false if employee rejects
                                 System.out.println("Promotion rejected.");
-                                validChoice = true; // exit the loop as the choice is valid
+                                validChoice = true; //exit the loop as the choice is valid
                             } else if (rejectionChoice == 1) {
                                 System.out.println("Returning to promotion decision.");
-                                // Do not set validChoice to true; the loop will restart
+                                //Do not set validChoice to true; the loop will restart
                             }else{
                                 System.out.println("Invalid choice. Please enter 0 or 1.");
                             }
@@ -163,13 +163,13 @@ public class PayrollMenu {
 
             //creating employees
             try {
-                if (choice == 0) {  // full-Time Employee
+                if (choice == 0) {  //full-Time Employee
                     new FullTimeEmployee(empId, empName, empTitle);
                     System.out.println("Added Full-Time Employee");
-                } else if (choice == 1) {  // hourly Employee
+                } else if (choice == 1) {  //hourly Employee
                     new HourlyEmployee(empId, empName, empTitle, empHours);
                     System.out.println("Added Hourly Employee");
-                } else if (choice == 2) {  // part-Time Employee
+                } else if (choice == 2) {  //part-Time Employee
                     new PartTimeEmployee(empId, empName, empTitle, empHours);
                     System.out.println("Added Part-Time Employee");
                 }
