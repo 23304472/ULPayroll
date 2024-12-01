@@ -101,8 +101,16 @@ public class PayrollMenu {
                             System.out.println(employee[0].toString());
                         } else if (choice == 1) {
                             //view current months payslip
+                        	double grosspay = employee[0].getGrossPay();
+                        	try {
+                        	Payslip payslip = new Payslip(employee[0], grosspay)
+                        	System.out.println(payslip);
+                        	} catch (FileNotFoundException e) {
+                                System.err.println("Error reading salary information: " + e.getMessage());
+                            }
                         } else if (choice == 2) {
                             //view historic payslips
+                        	
                         } else {
                             //invalid input
                             System.out.println("Returning");
